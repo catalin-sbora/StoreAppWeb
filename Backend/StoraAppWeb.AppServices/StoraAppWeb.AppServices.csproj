@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\StoreAppWeb.AppServices.DataModel\StoreAppWeb.AppServices.DataModel.csproj" />
+    <ProjectReference Include="..\Domain\Model\StoreAppWeb.Domain.Model\StoreAppWeb.Domain.Model.csproj" />
+    <ProjectReference Include="..\Domain\StoreAppWeb.Domain.Abstractions\StoreAppWeb.Domain.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>
