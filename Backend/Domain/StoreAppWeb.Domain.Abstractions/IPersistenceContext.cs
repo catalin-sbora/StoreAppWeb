@@ -10,8 +10,7 @@ namespace StoreAppWeb.Domain.Abstractions
     {
         void Initialize(string configOptions);
         IAdminsRepository AdminsRepository { get; }
-        ISellersRepository SellersRepository { get; }
-        IStoreRepository CashRegistersRepository { get; }
+        ISellersRepository SellersRepository { get; }        
         IStoreRepository StoreRepository { get; }
         Task SaveAsync();
     }

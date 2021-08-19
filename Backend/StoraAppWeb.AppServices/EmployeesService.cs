@@ -38,8 +38,7 @@ namespace StoraAppWeb.AppServices
         {
             var seller = personalData.ToSeller(await storeRepository.GetCurrentStoreAsync());
             await sellersRepository.AddAsync(seller);
-            await persistenceContext.SaveAsync();
-            
+            await persistenceContext.SaveAsync();            
             return seller.PersonalData.ToPersonInfo();            
         }
 

@@ -11,7 +11,7 @@ namespace StoreAppWeb.Domain.Abstractions
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(string id);
-        Task UpdateAsync(T newInfo);
+        Task<T> UpdateAsync(T newInfo);
         Task RemoveAsync(string id);
         Task<T> AddAsync(T newEntity);
     }

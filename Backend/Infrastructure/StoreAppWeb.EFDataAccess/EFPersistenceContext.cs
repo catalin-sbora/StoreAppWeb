@@ -9,22 +9,29 @@ namespace StoreAppWeb.EFDataAccess
 {
     public class EFPersistenceContext : IPersistenceContext
     {
-        public IAdminsRepository AdminsRepository => throw new NotImplementedException();
+        private readonly StoreAppDbContext dbContext;
 
-        public ISellersRepository SellersRepository => throw new NotImplementedException();
+        public EFPersistenceContext(StoreAppDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+            StoreRepository = new EFStoreRepository(dbContext);
+            AdminsRepository = new EFAdminsRepository(dbContext);
+            SellersRepository = new EFSellersRepository(dbContext);
+        }
 
-        public IStoreRepository CashRegistersRepository => throw new NotImplementedException();
+        public IAdminsRepository AdminsRepository { get; private set;}
 
-        public IStoreRepository StoreRepository => throw new NotImplementedException();
+        public ISellersRepository SellersRepository { get; private set; }
+        public IStoreRepository StoreRepository { get; private set; }
 
         public void Initialize(string configOptions)
         {
             throw new NotImplementedException();
         }
 
-        public Task SaveAsync()
+        public async Task SaveAsync()
         {
-            throw new NotImplementedException();
+            await dbContext.SaveChangesAsync();
         }
     }
 }

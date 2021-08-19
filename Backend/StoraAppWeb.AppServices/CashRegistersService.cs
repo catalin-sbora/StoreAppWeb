@@ -30,17 +30,25 @@ namespace StoraAppWeb.AppServices
         public async Task<IEnumerable<CashRegisterInfo>> GetAll()
         {
             var store = await context.StoreRepository.GetCurrentStoreAsync();
-            var registers = store.CashRegisters
-                                 .Select(register => register.ToCashRegisterInfo());
+            IEnumerable<CashRegisterInfo> registers = new List<CashRegisterInfo>();
+            if (store != null)
+            {
+                 registers= store.CashRegisters
+                                     .Select(register => register.ToCashRegisterInfo());
+            }
             return registers;
         }
 
         public async Task<CashRegisterInfo> GetCashRegister(string id)
         {
             var store = await context.StoreRepository.GetCurrentStoreAsync();
-            var register = store.CashRegisters
-                                 .Where(register => register.Id.Equals(id))
-                                 .SingleOrDefault();
+            CashRegister register = null;
+            if (store != null)
+            {
+                register = store.CashRegisters
+                                     .Where(register => register.Id.Equals(id))
+                                     .SingleOrDefault();
+            }
             if (register == null)
                 throw new ArgumentException($"Invalid register id {id}");
 

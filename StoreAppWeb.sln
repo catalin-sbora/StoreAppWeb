@@ -13,19 +13,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{1C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{EC6442EB-58DE-4996-8EEE-4517C567C860}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoraAppWeb.AppServices", "Backend\StoraAppWeb.AppServices\StoraAppWeb.AppServices.csproj", "{6B126D0A-A9BD-4B43-9945-A080B0EE9107}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoraAppWeb.AppServices", "Backend\StoraAppWeb.AppServices\StoraAppWeb.AppServices.csproj", "{6B126D0A-A9BD-4B43-9945-A080B0EE9107}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{7DFB2D05-9496-40EE-85C8-13D859826CA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreAppWeb.EFDataAccess", "Backend\Infrastructure\StoreAppWeb.EFDataAccess\StoreAppWeb.EFDataAccess.csproj", "{3520E185-8C27-4D7A-938F-01DF6DA4DE3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreAppWeb.EFDataAccess", "Backend\Infrastructure\StoreAppWeb.EFDataAccess\StoreAppWeb.EFDataAccess.csproj", "{3520E185-8C27-4D7A-938F-01DF6DA4DE3A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{7795860D-3E35-45D3-8592-9781DD71AD43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreAppWeb.Domain.Model", "Backend\Domain\Model\StoreAppWeb.Domain.Model\StoreAppWeb.Domain.Model.csproj", "{D1C128BB-46DE-4097-8DE5-3D0111AA0F7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreAppWeb.Domain.Model", "Backend\Domain\Model\StoreAppWeb.Domain.Model\StoreAppWeb.Domain.Model.csproj", "{D1C128BB-46DE-4097-8DE5-3D0111AA0F7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreAppWeb.Domain.Abstractions", "Backend\Domain\StoreAppWeb.Domain.Abstractions\StoreAppWeb.Domain.Abstractions.csproj", "{AA38BDCC-E8FA-4217-8771-0C4AD8CEABD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreAppWeb.Domain.Abstractions", "Backend\Domain\StoreAppWeb.Domain.Abstractions\StoreAppWeb.Domain.Abstractions.csproj", "{AA38BDCC-E8FA-4217-8771-0C4AD8CEABD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreAppWeb.AppServices.DataModel", "StoreAppWeb.AppServices.DataModel\StoreAppWeb.AppServices.DataModel.csproj", "{70489CDE-3EFA-4261-B96B-4417A2415F60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreAppWeb.AppServices.DataModel", "StoreAppWeb.AppServices.DataModel\StoreAppWeb.AppServices.DataModel.csproj", "{70489CDE-3EFA-4261-B96B-4417A2415F60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

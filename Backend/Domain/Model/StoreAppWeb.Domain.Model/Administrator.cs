@@ -8,15 +8,14 @@ namespace StoreAppWeb.Domain.Model
 {
     public class Administrator : BaseEntity
     {
-        
+        private Store store;
         private int lastCashRegister = 0;
 
-        public Store Store { get; }
-        public Person Person { get; }
+        public Store Store { get => store; private set => store = value; }
+        public Person Person { get; set; }
 
-        public Administrator(Store store)
-        {
-            Store = store;
+        public Administrator()
+        {            
         }
         public CashRegister AddNewCashRegister()
         {
@@ -38,6 +37,10 @@ namespace StoreAppWeb.Domain.Model
         public void RemoveProduct(string productId)
         {          
             Store.Stock.Remove(productId);           
+        }
+        public void ChangeStore(Store newStore)
+        {
+            Store = newStore;
         }
 
 

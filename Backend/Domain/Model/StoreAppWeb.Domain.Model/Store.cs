@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace StoreAppWeb.Domain.Model
 {
-    public class Store
+    public class Store: BaseEntity
     {
         private readonly Dictionary<string, CashRegister> cashRegisters = new Dictionary<string, CashRegister>();
-        public string Name { get; private set; }
+        public string Name { get; set; }
         public Stock Stock { get; private set; }
         public IReadOnlyCollection<CashRegister> CashRegisters => cashRegisters.Values
                                                                                .ToList()
@@ -42,7 +42,7 @@ namespace StoreAppWeb.Domain.Model
             {
                 throw new ArgumentException($"Cash register with the given identifier {identifier} already installed", "identifier");
             }
-            cashRegisters[identifier] = new CashRegister(identifier);
+            cashRegisters[identifier] = CashRegister.Create(identifier);
         }
 
         public CashRegister GetCashRegister(string id)

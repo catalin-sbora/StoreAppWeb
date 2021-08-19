@@ -11,11 +11,15 @@ namespace StoreAppWeb.Domain.Model
 
         public IReadOnlyCollection<Receipt> Receipts => receipts.AsReadOnly();
         
-        public CashRegister(string identifier)
+        private CashRegister()
         {
-            Id = identifier;
+            
         }
-
+        public static CashRegister Create(string identifier)
+        {
+            var register = new CashRegister() { Id = identifier };
+            return register;
+        }
         public void StartNewSell()
         {
             if (CurrentReceipt != null)

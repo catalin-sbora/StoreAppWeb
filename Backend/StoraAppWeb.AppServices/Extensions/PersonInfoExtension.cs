@@ -14,7 +14,8 @@ namespace StoraAppWeb.AppServices.Extensions
 
         public static Administrator ToAdministrator(this PersonInfo personInfo, Store currentStore)
         {
-            var admin = new Administrator(currentStore);
+            var admin = new Administrator();
+            admin.ChangeStore(currentStore);
             admin.Person.Id = personInfo.Id;
             admin.Person.FirstName = personInfo.FirstName;
             admin.Person.LastName = personInfo.LastName;
@@ -24,12 +25,19 @@ namespace StoraAppWeb.AppServices.Extensions
 
         public static Seller ToSeller(this PersonInfo personInfo, Store currentStore)
         {  
-            var seller = new Seller(currentStore);
-            seller.PersonalData.Id = personInfo.Id;
-            seller.PersonalData.FirstName = personInfo.FirstName;
-            seller.PersonalData.LastName = personInfo.LastName;
-            seller.PersonalData.Email = personInfo.Email;
+            var seller = Seller.Create(currentStore, personInfo.ToPerson());            
             return seller;
+        }
+        public static Person ToPerson(this PersonInfo personInfo)
+        {
+            var person = new Person()
+            {
+                Id = personInfo.Id,
+                FirstName = personInfo.FirstName,
+                LastName = personInfo.LastName,
+                Email = personInfo.Email
+            };
+            return person;
         }
     }
 }

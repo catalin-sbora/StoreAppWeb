@@ -38,9 +38,17 @@ namespace StoreAppWeb.Server.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<CashRegisterInfo> Get([FromRoute] string id)
+        public async Task<IActionResult> Get([FromRoute] string id)
         {
-            return await registersService.GetCashRegister(id);
+            try
+            {
+               var cashRegiser =  await registersService.GetCashRegister(id);
+                return Ok(cashRegiser);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPost]

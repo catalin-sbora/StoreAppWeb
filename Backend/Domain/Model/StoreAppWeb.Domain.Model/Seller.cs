@@ -4,14 +4,20 @@ namespace StoreAppWeb.Domain.Model
 {
     public class Seller:BaseEntity
     {
-        private readonly Store store;
+        private Store store;
         private CashRegister currentCashRegister = null;
-        private readonly Stock storeStock;
+        private Stock storeStock;
         public Person PersonalData { get; set; }
-        public Seller(Store store)
+        public Store Store { get => store; private set => store = value; }
+        private Seller()
+        {                        
+        }
+        public static Seller Create(Store store, Person personalData)
         {
-            this.store = store;
-            storeStock = store.Stock;
+            var seller = new Seller();
+            seller.Store = store;
+            seller.PersonalData = personalData;
+            return seller;
         }
 
         public void StartSell(string registerId)
@@ -45,6 +51,12 @@ namespace StoreAppWeb.Domain.Model
                 throw new NoCashRegisterSelectedException(this);
             }
             currentCashRegister.FinalizeSell();
+        }
+
+        public void ChangeStore(Store newStore)
+        {
+            Store = newStore;
+            storeStock = store.Stock;
         }
     }
 }

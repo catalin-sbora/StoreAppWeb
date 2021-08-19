@@ -1,4 +1,5 @@
-﻿using StoreAppWeb.Domain.Abstractions;
+﻿using Microsoft.EntityFrameworkCore;
+using StoreAppWeb.Domain.Abstractions;
 using StoreAppWeb.Domain.Model;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,14 @@ namespace StoreAppWeb.EFDataAccess
 {
     public class EFStoreRepository : IStoreRepository
     {
-        public Task<Store> GetCurrentStoreAsync()
+        private readonly StoreAppDbContext dbContext;
+        public EFStoreRepository(StoreAppDbContext dbContext)
         {
-            throw new NotImplementedException();
+            this.dbContext = dbContext;
+        }
+        public async Task<Store> GetCurrentStoreAsync()
+        {
+            return await dbContext.Stores.FirstOrDefaultAsync();
         }
     }
 }

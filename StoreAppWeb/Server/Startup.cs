@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +13,7 @@ using StoreAppWeb.Domain.Abstractions;
 using StoreAppWeb.EFDataAccess;
 using StoreAppWeb.Server.Data;
 using StoreAppWeb.Server.Models;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 
 namespace StoreAppWeb.Server
@@ -31,15 +33,25 @@ namespace StoreAppWeb.Server
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
+                    Configuration.GetConnectionString("IdentityConnection")));
+
+            services.AddDbContext<StoreAppDbContext>(options =>
+                options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(opt =>
+                {
+                    opt.IdentityResources["openid"].UserClaims.Add("role");
+                    opt.ApiResources.Single().UserClaims.Add("role");
+                });
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("role");
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
