@@ -23,14 +23,14 @@ namespace StoreAppWeb.EFDataAccess
             return addedEntity.Entity;
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
             var result = await dbContext.Set<T>()
                                         .ToListAsync();
             return result;
         }
 
-        public async Task<T> GetByIdAsync(string id)
+        public virtual async Task<T> GetByIdAsync(string id)
         {
             var result = await dbContext.Set<T>()
                                         .FirstOrDefaultAsync(entity => entity.Id.Equals(id));

@@ -1,6 +1,57 @@
 ﻿@page "/cashregisters"
-<h3>CashRegisters</h3>
+@using StoreAppWeb.API.Client;
+@using StoreAppWeb.Client.Components;
+@using StoreAppWeb.AppServices.DataModel;
 
-@code {
+@inject CashRegistersManagerClient apiClient;
+@inject IToastService toastService;
+ 
+@if (cashRegisters == null)
+{ 
+    <span> Loading ... </span>
+}
+else
+{ 
+    <CashRegistersList CashRegisters="@cashRegisters" OnDeleteEntryList="DeleteEntryList" OnAddItem="AddNewListEntry">
+
+    </CashRegistersList>   
+}
+
+@code { 
+
+    private List<CashRegisterInfo> cashRegisters = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        cashRegisters = await apiClient.GetAll();
+    }
+
+    public async Task DeleteEntryList(CashRegisterInfo cashRegisterInfo)
+    {
+        try
+        {
+            await apiClient.DeleteItem(cashRegisterInfo.Id);
+            cashRegisters.RemoveAll(reg => reg.Id.Equals(cashRegisterInfo.Id));
+            StateHasChanged();
+        }
+        catch (HttpRequestException ex)
+        {
+            toastService.ShowError($"Failed to remove the register. {ex.Message}");
+        }
+    }
+
+    public async Task AddNewListEntry(CashRegisterInfo cashRegisterInfo)
+    {
+        try
+        {
+            var newCashRegister = await apiClient.AddItem(cashRegisterInfo);
+            cashRegisters.Add(newCashRegister);
+            StateHasChanged();
+        }
+        catch (HttpRequestException ex)
+        {
+            toastService.ShowError($"Failed to add a new cash register. {ex.Message}");
+        }
+    }
 
 }

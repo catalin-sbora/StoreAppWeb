@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreAppWeb.Domain.Abstract
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreAppWeb.AppServices.DataModel", "StoreAppWeb.AppServices.DataModel\StoreAppWeb.AppServices.DataModel.csproj", "{70489CDE-3EFA-4261-B96B-4417A2415F60}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreAppWeb.API.Client", "StoreAppWeb.API.Client\StoreAppWeb.API.Client.csproj", "{C71DAA8B-2E49-4103-8E20-654326C3A5E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{70489CDE-3EFA-4261-B96B-4417A2415F60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70489CDE-3EFA-4261-B96B-4417A2415F60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70489CDE-3EFA-4261-B96B-4417A2415F60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C71DAA8B-2E49-4103-8E20-654326C3A5E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C71DAA8B-2E49-4103-8E20-654326C3A5E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C71DAA8B-2E49-4103-8E20-654326C3A5E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C71DAA8B-2E49-4103-8E20-654326C3A5E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +85,7 @@ Global
 		{D1C128BB-46DE-4097-8DE5-3D0111AA0F7D} = {7795860D-3E35-45D3-8592-9781DD71AD43}
 		{AA38BDCC-E8FA-4217-8771-0C4AD8CEABD2} = {7795860D-3E35-45D3-8592-9781DD71AD43}
 		{70489CDE-3EFA-4261-B96B-4417A2415F60} = {EC6442EB-58DE-4996-8EEE-4517C567C860}
+		{C71DAA8B-2E49-4103-8E20-654326C3A5E6} = {1CDE9820-E7EB-4314-A2A9-4B48C2769AD4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D4B0FCC1-CBDC-43F5-BF59-69D0FE652501}

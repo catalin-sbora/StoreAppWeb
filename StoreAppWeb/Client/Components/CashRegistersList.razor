@@ -1,0 +1,40 @@
+﻿@using StoreAppWeb.AppServices.DataModel;
+@using StoreAppWeb.Client.Components.Headers;
+@using StoreAppWeb.Client.Components.ListEntries;
+@using StoreAppWeb.Client.Components.CashRegisters;
+<h3>CashRegistersList</h3>
+<CashRegistersListHeader></CashRegistersListHeader>
+@foreach (var cashRegister in CashRegisters)
+{
+    var isEven = (entryNo % 2) == 0;
+    <CashRegistersListEntry CashRegister="@cashRegister" OnDeleteItem="OnDeleteEntryList" IsEvenEntry="isEven">
+    </CashRegistersListEntry>
+    entryNo++;
+}
+<AddCashRegisterDialog @ref="addDialogComponent" OnAddItem="async(item) => { await OnAddItem.InvokeAsync(item); }"></AddCashRegisterDialog>
+<div class="row">
+    <div class="col-12 d-flex justify-content-end">&nbsp;</div>
+        <div class="col-12 d-flex justify-content-end">
+            <br>
+            <button @onclick="OpenAddCashRegister" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Add</button>
+        </div>
+    </div>
+
+@code {
+    [Parameter]
+    public List<CashRegisterInfo> CashRegisters { get; set; }
+    private int entryNo = 0;
+
+    [Parameter]
+    public EventCallback<CashRegisterInfo> OnDeleteEntryList { get; set; }
+
+    [Parameter]
+    public EventCallback<CashRegisterInfo> OnAddItem { get; set; }
+    private AddCashRegisterDialog addDialogComponent;
+
+    private void OpenAddCashRegister()
+    {
+        addDialogComponent.Show();
+    }
+
+}

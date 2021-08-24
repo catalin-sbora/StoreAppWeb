@@ -1,8 +1,10 @@
+using Blazored.Toast;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using StoreAppWeb.API.Client;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -23,9 +25,10 @@ namespace StoreAppWeb.Client
 
             // Supply HttpClient instances that include access tokens when making requests to the server project
             builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("StoreAppWeb.ServerAPI"));
+            builder.Services.AddScoped<CashRegistersManagerClient>();
 
-           builder.Services.AddApiAuthorization();
-
+            builder.Services.AddApiAuthorization();
+            builder.Services.AddBlazoredToast(); 
             await builder.Build().RunAsync();
         }
     }

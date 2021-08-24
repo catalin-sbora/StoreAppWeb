@@ -55,17 +55,17 @@ namespace StoraAppWeb.AppServices
             return register.ToCashRegisterInfo();
         }
 
-        public async Task<CashRegisterInfo> AddCashRegister(string adminId)
+        public async Task<CashRegisterInfo> AddCashRegister(string adminId, CashRegisterInfo newRegisterInfo)
         {
             var adminUser = await GetAdminAccount(adminId);
-            var addedRegister = adminUser.AddNewCashRegister();
+            var addedRegister = adminUser.AddNewCashRegister(newRegisterInfo.Name);
             await context.SaveAsync();
             return addedRegister.ToCashRegisterInfo();   
         }
 
         public async Task RemoveCashRegister(string adminId, string cashRegisterId)
-        {
-            var adminUser = await GetAdminAccount(adminId);
+        {            
+            var adminUser = await GetAdminAccount(adminId);            
             adminUser.RemoveCashRegister(cashRegisterId);
             await context.SaveAsync();
         }

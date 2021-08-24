@@ -24,7 +24,21 @@ namespace StoreAppWeb.EFDataAccess
             
         }
         protected override void OnModelCreating(ModelBuilder builder)
-        { 
+        {
+
+            builder.Entity<Store>()
+                .HasMany(p => p.CashRegisters)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
+                /*builder.Entity<Store>()
+                .HasMany(p => p.CashRegisters)
+                .WithOne()
+                .Metadata
+                .PrincipalToDependent
+                .SetPropertyAccessMode(PropertyAccessMode.Field);*/
+
+
+
 
         }
 

@@ -1,0 +1,52 @@
+﻿@using StoreAppWeb.AppServices.DataModel;
+@if (ShowAddRegister)
+{ 
+    <div class="modal fade show d-block" id="addRegisterModal" tabindex="-1" role="dialog" aria-labelledby="addRegisterModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addRegisterModalLabel">Add Cash Register</h5>
+                    <button type="button" class="close" @onclick="Close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <EditForm Model="@newCashRegister" OnValidSubmit="async()=> { await OnAddItem.InvokeAsync(newCashRegister); Close(); }">
+                    <DataAnnotationsValidator />
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-12 justify-content-start">
+                                <InputText class="form-control" placeholder="Register Name" @bind-Value="newCashRegister.Name"></InputText>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" @onclick="Close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+}
+@code {
+    [Parameter]
+    public EventCallback<CashRegisterInfo> OnAddItem {get; set;}
+
+    protected bool ShowAddRegister { get; set; }
+    public void Show()
+    {
+        ShowAddRegister = true;
+        StateHasChanged();
+    }
+
+    protected void Close()
+    {
+        ShowAddRegister = false;
+        StateHasChanged();
+    }
+
+    private CashRegisterInfo newCashRegister = new CashRegisterInfo { Name = "NewCashRegister" };
+}

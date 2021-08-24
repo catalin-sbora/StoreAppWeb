@@ -18,7 +18,9 @@ namespace StoreAppWeb.EFDataAccess
         }
         public async Task<Store> GetCurrentStoreAsync()
         {
-            return await dbContext.Stores.FirstOrDefaultAsync();
+            return await dbContext.Stores
+                                  .Include(s=>s.CashRegisters)
+                                  .FirstOrDefaultAsync();
         }
     }
 }

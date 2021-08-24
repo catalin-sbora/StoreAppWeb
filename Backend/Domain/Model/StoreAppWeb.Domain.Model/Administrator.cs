@@ -9,19 +9,19 @@ namespace StoreAppWeb.Domain.Model
     public class Administrator : BaseEntity
     {
         private Store store;
-        private int lastCashRegister = 0;
+        //private int LastCashRegister = 0;
 
         public Store Store { get => store; private set => store = value; }
         public Person Person { get; set; }
-
+        public int LastCashRegister { get; private set; }
         public Administrator()
         {            
         }
-        public CashRegister AddNewCashRegister()
+        public CashRegister AddNewCashRegister(string crName)
         {
-            lastCashRegister++;
-            Store.InstallNewCashRegister(lastCashRegister.ToString());
-            return Store.GetCashRegister(lastCashRegister.ToString());
+            LastCashRegister++;
+            Store.InstallNewCashRegister(LastCashRegister.ToString(), crName);
+            return Store.GetCashRegister(LastCashRegister.ToString());
         }
 
         public void RemoveCashRegister(string registerId)

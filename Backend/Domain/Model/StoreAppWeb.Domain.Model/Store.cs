@@ -8,18 +8,21 @@ namespace StoreAppWeb.Domain.Model
 {
     public class Store: BaseEntity
     {
-        private readonly Dictionary<string, CashRegister> cashRegisters = new Dictionary<string, CashRegister>();
+        private List<CashRegister> _cashRegisters = new List<CashRegister>();        
         public string Name { get; set; }
-        public Stock Stock { get; private set; }
-        public IReadOnlyCollection<CashRegister> CashRegisters => cashRegisters.Values
-                                                                               .ToList()
-                                                                               .AsReadOnly();
-
+        public Stock Stock { get; private set; }         
+        public IReadOnlyCollection<CashRegister> CashRegisters => _cashRegisters.AsReadOnly();
+        
         public Store()
         {
             Stock = new Stock();
         }
 
+        private CashRegister GetRegisterById(string id)
+        {
+            return _cashRegisters.Where(register => register.Id.Equals(id))
+                                                .SingleOrDefault(); 
+        }
         public void LoadStock(List<StockItem> stockItems)
         {
             foreach (var stockItem in stockItems)
@@ -30,37 +33,40 @@ namespace StoreAppWeb.Domain.Model
 
         public void LoadDefaultCashRegisters()
         {
-            InstallNewCashRegister("1");
+            InstallNewCashRegister("1","Default");
         }
-        public void InstallNewCashRegister(string identifier)
+        public void InstallNewCashRegister(string identifier, string crName)
         {
             if (string.IsNullOrEmpty(identifier))
             {
                 throw new ArgumentException($"Invalid identifier provided for a cash register");
             }
-            if (cashRegisters.ContainsKey(identifier))
+            var existingRegister = GetRegisterById(identifier);
+            if (existingRegister != null)
             {
                 throw new ArgumentException($"Cash register with the given identifier {identifier} already installed", "identifier");
             }
-            cashRegisters[identifier] = CashRegister.Create(identifier);
+            _cashRegisters.Add(CashRegister.Create(identifier, crName));
         }
 
         public CashRegister GetCashRegister(string id)
         {
-            if (cashRegisters.ContainsKey(id))
+            var existingRegister = GetRegisterById(id);
+            if (existingRegister != null)
             {
-                return cashRegisters[id];
+                return existingRegister;
             }
             throw new ArgumentException($"Invalid register identifier {id}", "id");
         }
 
         public void UninstallCashRegister(string id)
         {
-            if (!cashRegisters.ContainsKey(id))
+            var existingRegister = GetRegisterById(id);
+            if (existingRegister == null)
             {
                 throw new ArgumentException($"Invalid register identifier {id}", "id");
             }
-            cashRegisters.Remove(id);
+            _cashRegisters.Remove(existingRegister);
         }
 
         

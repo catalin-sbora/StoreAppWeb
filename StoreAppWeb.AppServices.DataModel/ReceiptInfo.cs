@@ -12,5 +12,7 @@ namespace StoreAppWeb.AppServices.DataModel
         public List<ReceiptItemInfo> Items { get; set; }
         public decimal Total { get; set; }
 
+        public DateTime Created { get; set; }
+
     }
 }

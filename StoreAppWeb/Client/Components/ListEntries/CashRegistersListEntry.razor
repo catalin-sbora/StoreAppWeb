@@ -1,0 +1,76 @@
+﻿@using StoreAppWeb.AppServices.DataModel;
+@using StoreAppWeb.Client.Components;
+
+<div class="row list-entry @evenEntryText" >
+    <div class="col-4">@CashRegister.Name</div>
+    <div class="col-2">@CashRegister.Id</div>
+    <div class="col-2">@CashRegister.Receipts.Count</div>
+    <div class="col-2">@GetLastReceiptDate()</div>
+    <div class="col-2">
+        <button class="btn" @onclick="EditButtonClicked" alt="Edit Cash Register">
+            <i class="fas fa-edit">
+            </i>
+        </button>
+        <button class="btn" href="" @onclick="DeleteButtonClicked" alt="Delete Item">
+            <i class="fas fa-trash"></i>
+        </button>
+    </div>
+</div>
+<DeleteDialogComponent @ref="dialogComponent" ItemDescription="@CashRegister.Name" OnDeleteAccepted="async () => { await OnDeleteItem.InvokeAsync(CashRegister); }">
+
+</DeleteDialogComponent>
+
+@code {
+    [Parameter]
+    public CashRegisterInfo CashRegister { get; set; }
+    [Parameter]
+    public bool IsEvenEntry
+    {
+        get
+        {
+            return !string.IsNullOrEmpty(evenEntryText);
+        }
+        set
+        {
+            if (value == true)
+                evenEntryText = "list-entry-even";
+            else
+                evenEntryText = "";
+        }
+    }
+
+    [Parameter]
+    public EventCallback<CashRegisterInfo> OnDeleteItem { get; set; }
+
+    public EventCallback<CashRegisterInfo> OnUpdateItem { get; set; }
+    private DeleteDialogComponent dialogComponent;
+    
+    private string evenEntryText;
+
+    private DateTime GetLastReceiptDate()
+    {
+        var lastReceipt = CashRegister.Receipts
+                                       .OrderByDescending(ri => ri.Created)
+                                       .FirstOrDefault();
+        if (lastReceipt != null)
+        {
+            return lastReceipt.Created;
+        }
+        return DateTime.Now;
+    }
+
+    private async Task EditButtonClicked()
+    {
+        if (OnUpdateItem.HasDelegate)
+        {
+            await OnUpdateItem.InvokeAsync(CashRegister);
+        }
+    }
+
+    private void DeleteButtonClicked()
+    {
+        dialogComponent.Show();
+    }
+
+
+}

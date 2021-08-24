@@ -14,6 +14,7 @@ namespace StoraAppWeb.AppServices.Extensions
         {
             var crInfo = new CashRegisterInfo {
                 Id = cashRegister.Id,
+                Name = cashRegister.Name,
                 CurrentReceipt = null//cashRegister.CurrentReceipt?.ToReceiptInfo(),                
             };
 

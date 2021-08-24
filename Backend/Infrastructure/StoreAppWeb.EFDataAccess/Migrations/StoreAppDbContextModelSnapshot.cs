@@ -23,6 +23,9 @@ namespace StoreAppWeb.EFDataAccess.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("LastCashRegister")
+                        .HasColumnType("int");
+
                     b.Property<string>("PersonId")
                         .HasColumnType("nvarchar(450)");
 
@@ -45,6 +48,9 @@ namespace StoreAppWeb.EFDataAccess.Migrations
 
                     b.Property<string>("CurrentReceiptId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StoreId")
                         .HasColumnType("nvarchar(450)");
@@ -238,7 +244,8 @@ namespace StoreAppWeb.EFDataAccess.Migrations
 
                     b.HasOne("StoreAppWeb.Domain.Model.Store", null)
                         .WithMany("CashRegisters")
-                        .HasForeignKey("StoreId");
+                        .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("CurrentReceipt");
                 });

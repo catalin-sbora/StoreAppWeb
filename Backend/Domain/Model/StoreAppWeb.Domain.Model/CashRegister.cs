@@ -8,6 +8,7 @@ namespace StoreAppWeb.Domain.Model
     {
         private List<Receipt> receipts = new List<Receipt>();        
         public Receipt CurrentReceipt { get; private set; }
+        public string Name { get; set; }
 
         public IReadOnlyCollection<Receipt> Receipts => receipts.AsReadOnly();
         
@@ -15,9 +16,14 @@ namespace StoreAppWeb.Domain.Model
         {
             
         }
-        public static CashRegister Create(string identifier)
+        public static CashRegister Create(string identifier, string name=null)
         {
-            var register = new CashRegister() { Id = identifier };
+            string crName = name;
+            if (string.IsNullOrEmpty(crName))
+            {
+                crName = $"CR_{identifier}";
+            }
+            var register = new CashRegister() { Id = identifier, Name = crName };
             return register;
         }
         public void StartNewSell()

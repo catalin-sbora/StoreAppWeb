@@ -52,10 +52,10 @@ namespace StoreAppWeb.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<CashRegisterInfo> Add()
+        public async Task<CashRegisterInfo> Add([FromBody]CashRegisterInfo registerInfo)
         {
             var userId = GetCurrentUserId();            
-            return await registersService.AddCashRegister(userId);
+            return await registersService.AddCashRegister(userId, registerInfo);
         }
 
         [HttpDelete("{id}")]
@@ -64,6 +64,6 @@ namespace StoreAppWeb.Server.Controllers
             var userId = GetCurrentUserId();
             await registersService.RemoveCashRegister(userId, id);
         }
-
+        
     }
 }

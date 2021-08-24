@@ -14,6 +14,15 @@ namespace StoreAppWeb.EFDataAccess
         public EFAdminsRepository(StoreAppDbContext dbContext) : base(dbContext)
         { 
         }
+        public async override Task<Administrator> GetByIdAsync(string id)
+        {
+            return await dbContext.Administrators
+                           .Include(admin => admin.Person)
+                           .Include(admin => admin.Store)
+                           .ThenInclude(store=>store.CashRegisters)
+                           .Where(admin => admin.Id.Equals(id))
+                           .SingleOrDefaultAsync(); 
+        }
         public override async Task<Administrator> UpdateAsync(Administrator newInfo)
         {
             var currentAdmin = await dbContext.Administrators.FirstOrDefaultAsync(admin => admin.Id.Equals(newInfo.Id));
