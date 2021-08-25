@@ -3,22 +3,22 @@
 
 @inject NavigationManager Navigation
 @inject SignOutSessionStateManager SignOutManager
-
-<AuthorizeView>
-    <Authorized>
-        <a href="authentication/profile" class="nav-link text-light">Hello, @context.User.Identity.Name!</a>
-        <button class="nav-link btn text-light" @onclick="BeginSignOut">Log out</button>
-    </Authorized>
-    <NotAuthorized>
-        <a href="authentication/register">Register</a>
-        <a href="authentication/login">Log in</a>
-    </NotAuthorized>
-</AuthorizeView>
-
-@code{
-    private async Task BeginSignOut(MouseEventArgs args)
-    {
-        await SignOutManager.SetSignOutState();
-        Navigation.NavigateTo("authentication/logout");
+    <div class="d-flex flex-nowrap">
+        <AuthorizeView>
+            <Authorized>
+                <a href="authentication/profile" class="nav-link text-light">Hello, @context.User.Identity.Name!</a>
+                <button class="nav-link btn text-light" @onclick="BeginSignOut">Log out</button>
+            </Authorized>
+            <NotAuthorized>
+                <a href="authentication/register" class="nav-link text-light">Register</a>
+                <a href="authentication/login" class="nav-link text-light">Log in</a>
+            </NotAuthorized>
+        </AuthorizeView>
+    </div>
+    @code{
+        private async Task BeginSignOut(MouseEventArgs args)
+        {
+            await SignOutManager.SetSignOutState();
+            Navigation.NavigateTo("authentication/logout");
+        }
     }
-}
