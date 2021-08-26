@@ -10,7 +10,8 @@ namespace StoraAppWeb.AppServices.Extensions
 {
     public static class PersonExtension
     {
-        public static PersonInfo ToPersonInfo(this Person person)
+        
+        public static PersonInfo ToInfoObject(this Person person)
         {
             var personInfo = new PersonInfo {
                 Id = person.Id,

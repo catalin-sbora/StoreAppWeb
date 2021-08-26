@@ -26,6 +26,7 @@ namespace StoreAppWeb.Client
             // Supply HttpClient instances that include access tokens when making requests to the server project
             builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("StoreAppWeb.ServerAPI"));
             builder.Services.AddScoped<CashRegistersManagerClient>();
+            builder.Services.AddScoped<StockManagerClient>();
 
             builder.Services.AddApiAuthorization();
             builder.Services.AddBlazoredToast(); 

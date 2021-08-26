@@ -1,6 +1,39 @@
-﻿<h3>StockList</h3>
+﻿@using StoreAppWeb.AppServices.DataModel;
+
+<h3>Stock Items</h3>
+
+<StockItemsListHeader></StockItemsListHeader>
+@foreach (var item in StockItems)
+{
+    var isEven = (entryNo % 2) == 0;
+    <StockItemsListEntry StockItem="@item" OnDeleteItem="OnDeleteEntryList" IsEvenEntry="isEven">
+    </StockItemsListEntry>
+    entryNo++;
+}
+<AddStockItemDialog @ref="addDialogComponent" OnAddItem="async(item) => { await OnAddItem.InvokeAsync(item); }"></AddStockItemDialog>
+<div class="row">
+    <div class="col-12 d-flex justify-content-end">&nbsp;</div>
+    <div class="col-12 d-flex justify-content-end">
+        <br>
+        <button @onclick="OpenAddCashRegister" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Add</button>
+    </div>
+</div>
 
 @code {
- 
+    [Parameter]
+    public List<StockItemInfo> StockItems { get; set; }
+    private int entryNo = 0;
+
+    [Parameter]
+    public EventCallback<StockItemInfo> OnDeleteEntryList { get; set; }
+
+    [Parameter]
+    public EventCallback<StockItemInfo> OnAddItem { get; set; }
+    private AddStockItemDialog addDialogComponent;
+
+    private void OpenAddCashRegister()
+    {
+        addDialogComponent.Show();
+    }
 
 }

@@ -10,13 +10,13 @@ namespace StoraAppWeb.AppServices.Extensions
 {
     public static class StockItemExtension
     {
-        public static StockItemInfo ToStockItemInfo(this StockItem stockItem)
+        public static StockItemInfo ToInfoObject(this StockItem stockItem)
         {
             var stockItemInfo = new StockItemInfo
             {
                 Id = stockItem.Id,
                 Product = stockItem.Product
-                                   .ToProductInfo(),
+                                   .ToInfoObject(),
                 Qty = stockItem.Qty,                
                 TotalValue = stockItem.Total
             };

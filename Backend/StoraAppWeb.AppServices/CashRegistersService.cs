@@ -34,7 +34,7 @@ namespace StoraAppWeb.AppServices
             if (store != null)
             {
                  registers= store.CashRegisters
-                                     .Select(register => register.ToCashRegisterInfo());
+                                     .Select(register => register.ToInfoObject());
             }
             return registers;
         }
@@ -52,7 +52,7 @@ namespace StoraAppWeb.AppServices
             if (register == null)
                 throw new ArgumentException($"Invalid register id {id}");
 
-            return register.ToCashRegisterInfo();
+            return register.ToInfoObject();
         }
 
         public async Task<CashRegisterInfo> AddCashRegister(string adminId, CashRegisterInfo newRegisterInfo)
@@ -60,7 +60,7 @@ namespace StoraAppWeb.AppServices
             var adminUser = await GetAdminAccount(adminId);
             var addedRegister = adminUser.AddNewCashRegister(newRegisterInfo.Name);
             await context.SaveAsync();
-            return addedRegister.ToCashRegisterInfo();   
+            return addedRegister.ToInfoObject();   
         }
 
         public async Task RemoveCashRegister(string adminId, string cashRegisterId)

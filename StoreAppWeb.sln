@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreAppWeb.AppServices.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreAppWeb.API.Client", "StoreAppWeb.API.Client\StoreAppWeb.API.Client.csproj", "{C71DAA8B-2E49-4103-8E20-654326C3A5E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreAppWeb.Domain.UnitTests", "Backend\Domain\StoreAppWeb.Domain.UnitTests\StoreAppWeb.Domain.UnitTests.csproj", "{5125F74B-2E0F-4B0C-BC2C-834024C1F85E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{C71DAA8B-2E49-4103-8E20-654326C3A5E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C71DAA8B-2E49-4103-8E20-654326C3A5E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C71DAA8B-2E49-4103-8E20-654326C3A5E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5125F74B-2E0F-4B0C-BC2C-834024C1F85E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5125F74B-2E0F-4B0C-BC2C-834024C1F85E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5125F74B-2E0F-4B0C-BC2C-834024C1F85E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5125F74B-2E0F-4B0C-BC2C-834024C1F85E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +92,7 @@ Global
 		{AA38BDCC-E8FA-4217-8771-0C4AD8CEABD2} = {7795860D-3E35-45D3-8592-9781DD71AD43}
 		{70489CDE-3EFA-4261-B96B-4417A2415F60} = {EC6442EB-58DE-4996-8EEE-4517C567C860}
 		{C71DAA8B-2E49-4103-8E20-654326C3A5E6} = {1CDE9820-E7EB-4314-A2A9-4B48C2769AD4}
+		{5125F74B-2E0F-4B0C-BC2C-834024C1F85E} = {7795860D-3E35-45D3-8592-9781DD71AD43}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D4B0FCC1-CBDC-43F5-BF59-69D0FE652501}

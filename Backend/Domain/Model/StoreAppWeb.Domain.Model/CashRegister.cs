@@ -1,4 +1,5 @@
 ﻿using StoreAppWeb.Domain.Model.Exceptions;
+using System;
 using System.Collections.Generic;
 
 
@@ -19,10 +20,14 @@ namespace StoreAppWeb.Domain.Model
         public static CashRegister Create(string identifier, string name=null)
         {
             string crName = name;
+            if (string.IsNullOrEmpty(identifier))
+            {
+                throw new ArgumentNullException("identifier");
+            }
             if (string.IsNullOrEmpty(crName))
             {
-                crName = $"CR_{identifier}";
-            }
+                crName = $"CR_{identifier}";                
+            }            
             var register = new CashRegister() { Id = identifier, Name = crName };
             return register;
         }
@@ -32,7 +37,7 @@ namespace StoreAppWeb.Domain.Model
             {
                 throw new SellInProgressException($"A sell is in progress. The current sell must be finalized before starting a new sell", this, CurrentReceipt);
             }
-            CurrentReceipt = new Receipt();
+            CurrentReceipt = new Receipt() { Id = Guid.NewGuid().ToString() };
         }
 
         

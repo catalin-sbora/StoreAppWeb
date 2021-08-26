@@ -19,6 +19,11 @@ namespace StoreAppWeb.EFDataAccess
 
         public async Task<T> AddAsync(T newEntity)
         {
+            if (string.IsNullOrEmpty(newEntity.Id))
+            {
+                newEntity.Id = Guid.NewGuid()
+                                   .ToString();
+            }
             var addedEntity = await dbContext.Set<T>().AddAsync(newEntity);           
             return addedEntity.Entity;
         }

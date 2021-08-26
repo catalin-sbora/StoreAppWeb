@@ -5,16 +5,11 @@ using System.Net.Http;
 
 namespace StoreAppWeb.API.Client
 {
-    public class StockManagerClient
-    {
-        private HttpClient httpClient;
-        public StockManagerClient(HttpClient httpClient)
+    public class StockManagerClient:APIClient<StockItemInfo>
+    {        
+        public StockManagerClient(HttpClient httpClient):base(httpClient)
         {
-            this.httpClient = httpClient;
-        }
-        public List<StockItemInfo> GetStockItems()
-        {
-            return new List<StockItemInfo>();
-        }
+            EndpointBase = "/api/stock";
+        }        
     }
 }

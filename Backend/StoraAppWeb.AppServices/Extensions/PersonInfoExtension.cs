@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 namespace StoraAppWeb.AppServices.Extensions
 {
     public static class PersonInfoExtension
-    {
-        
+    {        
 
         public static Administrator ToAdministrator(this PersonInfo personInfo, Store currentStore)
         {
@@ -25,10 +24,10 @@ namespace StoraAppWeb.AppServices.Extensions
 
         public static Seller ToSeller(this PersonInfo personInfo, Store currentStore)
         {  
-            var seller = Seller.Create(currentStore, personInfo.ToPerson());            
+            var seller = Seller.Create(currentStore, personInfo.ToDomainObject());            
             return seller;
         }
-        public static Person ToPerson(this PersonInfo personInfo)
+        public static Person ToDomainObject(this PersonInfo personInfo)
         {
             var person = new Person()
             {

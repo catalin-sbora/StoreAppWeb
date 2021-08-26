@@ -17,12 +17,15 @@ namespace StoreAppWeb.EFDataAccess
             StoreRepository = new EFStoreRepository(dbContext);
             AdminsRepository = new EFAdminsRepository(dbContext);
             SellersRepository = new EFSellersRepository(dbContext);
+            StockItemsRepository = new EFStockItemsRepository(dbContext);
         }
 
         public IAdminsRepository AdminsRepository { get; private set;}
 
         public ISellersRepository SellersRepository { get; private set; }
         public IStoreRepository StoreRepository { get; private set; }
+        public IStockItemsRepository StockItemsRepository { get; private set; }
+        
 
         public void Initialize(string configOptions)
         {

@@ -6,13 +6,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoraAppWeb.AppServices.Extensions
+namespace StoraAppWeb.AppServices.Converters
 {
-    public static class CashRegisterExtension
+    public class CashRegisterConverter : DomainConverter<CashRegisterInfo, CashRegister>
     {
-        public static CashRegisterInfo ToInfoObject(this CashRegister cashRegister)
+        public override CashRegister ToDomainObject(CashRegisterInfo infoObject)
         {
-            var crInfo = new CashRegisterInfo {
+            return CashRegister.Create(infoObject.Id, infoObject.Name);
+        }
+
+        public override CashRegisterInfo ToInfoObject(CashRegister cashRegister)
+        {
+            var crInfo = new CashRegisterInfo
+            {
                 Id = cashRegister.Id,
                 Name = cashRegister.Name,
                 CurrentReceipt = null//cashRegister.CurrentReceipt?.ToReceiptInfo(),                

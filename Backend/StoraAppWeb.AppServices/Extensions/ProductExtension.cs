@@ -10,7 +10,7 @@ namespace StoraAppWeb.AppServices.Extensions
 {
     public static class ProductExtension
     {
-        public static ProductInfo ToProductInfo(this Product product)
+        public static ProductInfo ToInfoObject(this Product product)
         {
             return new ProductInfo
             {

@@ -1,0 +1,64 @@
+﻿@using StoreAppWeb.AppServices.DataModel;
+@if (ShowAddRegister)
+{ 
+    <div class="modal fade show d-block" id="addRegisterModal" tabindex="-1" role="dialog" aria-labelledby="addRegisterModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addRegisterModalLabel">Add Stock Item</h5>
+                    <button type="button" class="close" @onclick="Close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <EditForm Model="@newStockItem" OnValidSubmit="async()=> { await OnAddItem.InvokeAsync(newStockItem); Close(); }">
+                    <DataAnnotationsValidator />
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-12 justify-content-start form-group">
+                                <InputText class="form-control" placeholder="Product Name" @bind-Value="newStockItem.Product.Name"></InputText>
+                                <InputText class="form-control" placeholder="Product Description" @bind-Value="newStockItem.Product.Description"></InputText>
+                                <InputNumber class="form-control" @bind-Value="newStockItem.Product.Price"></InputNumber>
+                                <InputNumber class="form-control" @bind-Value="newStockItem.Qty"></InputNumber>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" @onclick="Close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+}
+@code {
+    [Parameter]
+    public EventCallback<StockItemInfo> OnAddItem {get; set;}
+
+    protected bool ShowAddRegister { get; set; }
+    public void Show()
+    {
+        ShowAddRegister = true;
+        StateHasChanged();
+    }
+
+    protected void Close()
+    {
+        ShowAddRegister = false;
+        StateHasChanged();
+    }
+
+    private StockItemInfo newStockItem = new StockItemInfo
+    { 
+        Product = new ProductInfo { 
+            Name = "Product Name",
+            Description = "Description",
+            Price = 0.0M
+        },
+        Qty = 0,
+        TotalValue = 0.0M
+    };
+}

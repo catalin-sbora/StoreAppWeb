@@ -12,6 +12,7 @@ namespace StoreAppWeb.Domain.Abstractions
         IAdminsRepository AdminsRepository { get; }
         ISellersRepository SellersRepository { get; }        
         IStoreRepository StoreRepository { get; }
+        IStockItemsRepository StockItemsRepository { get; }
         Task SaveAsync();
     }
 }

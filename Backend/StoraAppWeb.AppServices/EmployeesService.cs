@@ -31,7 +31,7 @@ namespace StoraAppWeb.AppServices
             await adminsRepository.AddAsync(admin);
             await persistenceContext.SaveAsync();
 
-            return admin.Person.ToPersonInfo();
+            return admin.Person.ToInfoObject();
         }
 
         public async Task<PersonInfo> CreateSeller(PersonInfo personalData)
@@ -39,7 +39,7 @@ namespace StoraAppWeb.AppServices
             var seller = personalData.ToSeller(await storeRepository.GetCurrentStoreAsync());
             await sellersRepository.AddAsync(seller);
             await persistenceContext.SaveAsync();            
-            return seller.PersonalData.ToPersonInfo();            
+            return seller.PersonalData.ToInfoObject();            
         }
 
 

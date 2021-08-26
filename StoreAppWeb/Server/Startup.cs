@@ -58,6 +58,7 @@ namespace StoreAppWeb.Server
 
             services.AddScoped<IPersistenceContext, EFPersistenceContext>();
             services.AddScoped<CashRegistersService>();
+            services.AddScoped<StockService>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();

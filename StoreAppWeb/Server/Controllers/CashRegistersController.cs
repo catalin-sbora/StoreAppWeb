@@ -14,30 +14,25 @@ namespace StoreAppWeb.Server.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize(Roles = "Administrator")]
-    public class CashRegistersController : ControllerBase
+    public class CashRegistersController : StoreWebControllerBase
     {
 
         private readonly CashRegistersService registersService;
 
-        private string GetCurrentUserId()
-        {
-            var userId = User.Claims
-                        .FirstOrDefault(c => c.Type.Equals(ClaimTypes.NameIdentifier))
-                        .Value;
-            return userId;
-        }
         public CashRegistersController(CashRegistersService registersService)
         {
             this.registersService = registersService;
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IEnumerable<CashRegisterInfo>> Get()
         {
             return await registersService.GetAll();
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> Get([FromRoute] string id)
         {
             try
@@ -52,6 +47,7 @@ namespace StoreAppWeb.Server.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles ="Administrator")]
         public async Task<CashRegisterInfo> Add([FromBody]CashRegisterInfo registerInfo)
         {
             var userId = GetCurrentUserId();            
@@ -59,6 +55,7 @@ namespace StoreAppWeb.Server.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task Delete([FromRoute]string id)
         {
             var userId = GetCurrentUserId();

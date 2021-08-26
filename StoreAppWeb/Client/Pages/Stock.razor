@@ -1,11 +1,59 @@
 ﻿@page "/stock"
 @using StoreAppWeb.Client.Components.StockManagement;
 
-<h3 class="page-header">Manage Stock</h3>
-<StockList>
+@using StoreAppWeb.API.Client;
+@using StoreAppWeb.Client.Components.CashRegistersManagement;
+@using StoreAppWeb.AppServices.DataModel;
 
-</StockList>
+@inject StockManagerClient apiClient;
+@inject IToastService toastService;
+
+@if (stockItems == null)
+{
+    <span> Loading ... </span>
+}
+else
+{
+    <StockList StockItems="@stockItems" OnDeleteEntryList="DeleteEntryList" OnAddItem="AddNewListEntry">
+
+    </StockList>
+}
 
 @code {
+
+    private List<StockItemInfo> stockItems = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        stockItems = await apiClient.GetAll();
+    }
+
+    public async Task DeleteEntryList(StockItemInfo itemInfo)
+    {
+        try
+        {
+            await apiClient.DeleteItem(itemInfo.Id);
+            stockItems.RemoveAll(reg => reg.Id.Equals(itemInfo.Id));
+            StateHasChanged();
+        }
+        catch (HttpRequestException ex)
+        {
+            toastService.ShowError($"Failed to remove the register. {ex.Message}");
+        }
+    }
+
+    public async Task AddNewListEntry(StockItemInfo itemInfo)
+    {
+        try
+        {
+            var newItem = await apiClient.AddItem(itemInfo);
+            stockItems.Add(newItem);
+            StateHasChanged();
+        }
+        catch (HttpRequestException ex)
+        {
+            toastService.ShowError($"Failed to add a new stockItem. {ex.Message}");
+        }
+    }
 
 }

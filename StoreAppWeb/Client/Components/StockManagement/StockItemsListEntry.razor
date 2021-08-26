@@ -1,12 +1,13 @@
 ﻿@using StoreAppWeb.AppServices.DataModel;
 @using StoreAppWeb.Client.Components.Common;
 
-<div class="row list-entry @evenEntryText" >
-    <div class="col-4">@CashRegister.Name</div>
-    <div class="col-2">@CashRegister.Id</div>
-    <div class="col-2">@CashRegister.Receipts.Count</div>
-    <div class="col-2">@GetLastReceiptDate()</div>
-    <div class="col-2">
+<div class="row list-entry @evenEntryText">
+    <div class="col-3">@StockItem.Product.Name</div>
+    <div class="col-2">@StockItem.Qty</div>
+    <div class="col-4">@StockItem.Product.Description</div>
+    <div class="col-1">@StockItem.Product.Price</div>
+    <div class="col-1">@StockItem.TotalValue</div>
+    <div class="col-1">
         <button class="btn" @onclick="EditButtonClicked" alt="Edit Cash Register">
             <i class="fas fa-edit">
             </i>
@@ -16,13 +17,14 @@
         </button>
     </div>
 </div>
-<DeleteDialogComponent @ref="dialogComponent" ItemDescription="@CashRegister.Name" OnDeleteAccepted="async () => { await OnDeleteItem.InvokeAsync(CashRegister); }">
-
+<DeleteDialogComponent @ref="dialogComponent" 
+                       ItemDescription="@StockItem.Product.Name" 
+                       OnDeleteAccepted="async () => { await OnDeleteItem.InvokeAsync(StockItem); }">
 </DeleteDialogComponent>
 
 @code {
     [Parameter]
-    public CashRegisterInfo CashRegister { get; set; }
+    public StockItemInfo StockItem { get; set; }
     [Parameter]
     public bool IsEvenEntry
     {
@@ -40,30 +42,20 @@
     }
 
     [Parameter]
-    public EventCallback<CashRegisterInfo> OnDeleteItem { get; set; }
+    public EventCallback<StockItemInfo> OnDeleteItem { get; set; }
 
-    public EventCallback<CashRegisterInfo> OnUpdateItem { get; set; }
+    public EventCallback<StockItemInfo> OnUpdateItem { get; set; }
     private DeleteDialogComponent dialogComponent;
-    
+
     private string evenEntryText;
 
-    private DateTime GetLastReceiptDate()
-    {
-        var lastReceipt = CashRegister.Receipts
-                                       .OrderByDescending(ri => ri.Created)
-                                       .FirstOrDefault();
-        if (lastReceipt != null)
-        {
-            return lastReceipt.Created;
-        }
-        return DateTime.Now;
-    }
+   
 
     private async Task EditButtonClicked()
     {
         if (OnUpdateItem.HasDelegate)
         {
-            await OnUpdateItem.InvokeAsync(CashRegister);
+            await OnUpdateItem.InvokeAsync(StockItem);
         }
     }
 

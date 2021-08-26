@@ -1,4 +1,5 @@
-﻿using StoraAppWeb.AppServices.Extensions;
+﻿using StoraAppWeb.AppServices.Converters;
+using StoraAppWeb.AppServices.Extensions;
 using StoreAppWeb.AppServices.DataModel;
 using StoreAppWeb.Domain.Abstractions;
 using StoreAppWeb.Domain.Model;
@@ -10,13 +11,25 @@ using System.Threading.Tasks;
 
 namespace StoraAppWeb.AppServices
 {
-    public class StockService
+    public class StockService: CRUDService<StockItemInfo, StockItem>
     {
-        private readonly IPersistenceContext context;
-        public StockService(IPersistenceContext context)
+        
+        public StockService(IPersistenceContext context):base(context, new StockItemConverter())
         {
             this.context = context;
         }
+
+        /*
+        public async Task<StockItemInfo> TakeProductFromStock(string productId, int qty)
+        {
+            var store = await context.StoreRepository
+                                     .GetCurrentStoreAsync();
+
+            var item = store.Stock.TakeFromStock(productId, qty);
+            await context.SaveAsync();
+            return item.ToStockItemInfo();
+        }*/
+        /*
         private async Task<Administrator> GetAdminAccount(string adminId)
         {
             var adminUser = await context.AdminsRepository.GetByIdAsync(adminId);
@@ -41,10 +54,10 @@ namespace StoraAppWeb.AppServices
         {
             var admin = await GetAdminAccount(adminId);
             var stock = admin.Store.Stock;
-            var newProduct = product.ToProduct();
+            var newProduct = product.ToDomainObject();
             stock.Add(newProduct, qty);
             await context.SaveAsync();
-            return newProduct.ToProductInfo();
+            return newProduct.ToInfoObject();
         }
 
         public async Task RemoveProduct(string adminId, string productId)
@@ -62,6 +75,7 @@ namespace StoraAppWeb.AppServices
             await context.SaveAsync();
             return item.ToStockItemInfo();
         }
+        */
 
 
 
