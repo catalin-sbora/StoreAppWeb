@@ -37,7 +37,7 @@ namespace StoreAppWeb.Domain.Model
             {
                 throw new SellInProgressException($"A sell is in progress. The current sell must be finalized before starting a new sell", this, CurrentReceipt);
             }
-            CurrentReceipt = new Receipt() { Id = Guid.NewGuid().ToString() };
+            //CurrentReceipt = new Receipt() { Id = Guid.NewGuid().ToString() };
         }
 
         
