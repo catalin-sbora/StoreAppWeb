@@ -20,8 +20,8 @@ namespace StoreAppWeb.Domain.Model
 
         private CashRegister GetRegisterById(string id)
         {
-            return _cashRegisters.Where(register => register.Id.Equals(id))
-                                                .SingleOrDefault(); 
+            return _cashRegisters
+                .SingleOrDefault(register => register.Id.Equals(id)); 
         }
         public void LoadStock(List<StockItem> stockItems)
         {

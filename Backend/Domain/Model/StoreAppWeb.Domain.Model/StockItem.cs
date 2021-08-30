@@ -9,19 +9,13 @@ namespace StoreAppWeb.Domain.Model
     public class StockItem:BaseEntity
     {
         public Product Product { get; set; }
+
         public int Qty 
         { 
             get; 
             set; 
         }
 
-        public decimal Total
-        {
-            get
-            {
-                return Product.Price * Qty;
-            }
-            
-        }
+        public decimal Total => Product.Price * Qty;
     }
 }

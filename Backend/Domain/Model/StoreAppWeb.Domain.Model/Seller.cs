@@ -29,7 +29,7 @@ namespace StoreAppWeb.Domain.Model
         public void AddProductToSell(string productId, int qty)
         {
             //validare currentCashRegister
-            var item = storeStock.TakeFromStock(productId, qty);
+            var item = store.Stock.TakeFromStock(productId, qty);
             currentCashRegister.CurrentReceipt
                                 .AddProduct(item.Product, qty);
         }

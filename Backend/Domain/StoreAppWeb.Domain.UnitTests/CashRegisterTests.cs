@@ -88,8 +88,8 @@ namespace StoreAppWeb.Domain.UnitTests
             //Act
             cr.FinalizeSell();
 
-            var addedReceipt = cr.Receipts.Where(r => r.Id.Equals(receipt.Id))
-                                          .SingleOrDefault();
+            var addedReceipt = cr.Receipts
+                .SingleOrDefault(r => r.Id.Equals(receipt.Id));
 
             Assert.IsNotNull(addedReceipt,"Current receipt was not added to receipts list.");
         }

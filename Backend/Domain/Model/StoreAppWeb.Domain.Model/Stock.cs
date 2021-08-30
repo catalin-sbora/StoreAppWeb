@@ -31,7 +31,7 @@ namespace StoreAppWeb.Domain.Model
             }
             else
             {
-                item = new StockItem { Product = productToAdd, Qty = 0 };
+                item = new StockItem { Product = productToAdd, Qty = 0, Id = productToAdd.Id};
                 items[productToAdd.Id] = item;
             }
             item.Qty += qty;
