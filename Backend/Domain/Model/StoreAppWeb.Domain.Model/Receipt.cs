@@ -27,7 +27,8 @@ namespace StoreAppWeb.Domain.Model
             }
             else
             {
-                item = new ReceiptItem() { 
+                item = new ReceiptItem() {
+                    Id = product.Id,
                     ProductName = product.Name,
                     PricePerUnit = product.Price
                 };
